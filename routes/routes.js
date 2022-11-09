@@ -22,20 +22,35 @@ router.get("/ingredients/listing", (req, res) => {
       });
     });
   });
+
+  const slugify = (val) => {
+    if (val === null) {
+      return null;
+    }
+    return slug(val, {
+      lower: true,
+      remove: null,
+    });
+  };
+
   
   router.get("/dishes/listing", (req, res) => {
     const options = req.params;
     let ingredientFilter = {};
     let isFilter = false
-    if (options.ingredientIds && options.ingredientIds.length) {
+    if (options.ingredientIds  && options.ingredientIds.length) {
       isFilter = true;
       ingredientFilter = {
         id: options.ingredientIds,
       }
     } else if (options.ingredients && options.ingredients.length) {
       isFilter = true;
+      const ingredientNames = [];
+      options.ingredients.forEach(ing=> {
+        ingredientNames.push(slugify(ing));
+      })
       ingredientFilter = {
-        name: { [Op.in]: options.ingredients },
+        name: { [Op.in]: ingredientNames },
       }
     }
     const filter = {
@@ -114,16 +129,6 @@ router.get("/ingredients/listing", (req, res) => {
     };
   };
   
-  const slugify = (val) => {
-    if (val === null) {
-      return null;
-    }
-    return slug(val, {
-      lower: true,
-      remove: null,
-    });
-  };
-
   router.post("/dishes/dish", async (req, res) =>{
     const values = req.body;
     const validateFlag = validate(values)
@@ -138,7 +143,7 @@ router.get("/ingredients/listing", (req, res) => {
     }
     else {
       res.status(500).send({
-        message: "Enter Ingredient Details"
+        message: "Please re-verify the entered details"
     });
   }
   });
