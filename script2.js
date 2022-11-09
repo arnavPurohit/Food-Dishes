@@ -4,12 +4,6 @@ const excel = require('exceljs');
 const BBPromise = require('bluebird');
 const slug = require('slug');
 
-
-// const customerId = 1; // update with Cipla CustomerId
-// const auth = {
-//   customerId : 1,
-// }
-
 const bulkCreate = async (values) => {
   const dish = await db.Dish.create(values);
   console.log(dish);
@@ -31,8 +25,6 @@ const slugify = (val) => {
     remove: null,
   });
 };
-
-// const userId = 427;
 
 const run = async () => {
   const productRecords = [];

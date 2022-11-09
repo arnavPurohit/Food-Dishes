@@ -3,10 +3,6 @@ const excel = require('exceljs');
 const BBPromise = require('bluebird');
 const slug = require('slug');
 
-
-const customerId = 1; // update with Cipla CustomerId
-
-
 const slugify = (val) => {
     if (val === null) {
       return null;
@@ -16,7 +12,6 @@ const slugify = (val) => {
       remove: null,
     });
   };
-// const userId = 427;
 
 const run = async () => {
   const productRecords = [];
