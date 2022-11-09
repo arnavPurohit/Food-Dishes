@@ -4,10 +4,7 @@ const db = require("../models/index.js");
 const slug = require('slug');
 const BBPromise = require('bluebird');
 const Op = db.Sequelize.Op;
-//   const model = require("../app/routers/routers.js");
-  // const product = require("../app/routers/routers.js");
-  let router = express.Router();
-  //console.log(111);
+let router = express.Router();
 
 router.get("/ingredients/listing", (req, res) => {
     const filter = {
