@@ -34,13 +34,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.brand = require("./Brand.js")(sequelize, Sequelize);
-// db.product = require("./Product.js")(sequelize, Sequelize);
-// db.categories = require("./Category.js")(sequelize, Sequelize);
-// db.spects = require("./Spect.js")(sequelize, Sequelize);
-// db.cart = require("./Cart.js")(sequelize, Sequelize);
-// db.orders = require("./Orders.js")(sequelize, Sequelize);
-// db.order_items = require("./order_items.js")(sequelize, Sequelize);
 
 module.exports = db;
 
