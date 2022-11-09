@@ -10,7 +10,7 @@ const slug = require('slug');
 //   customerId : 1,
 // }
 
-const bulkCreate = async (values, auth) => {
+const bulkCreate = async (values) => {
   const dish = await db.Dish.create(values);
   console.log(dish);
   await BBPromise.mapSeries(values.dishItems, (async (di) => {
@@ -41,7 +41,7 @@ const run = async () => {
     const worksheet = workbook.getWorksheet('trial');
     const products = worksheet.getColumn('A');
     products.eachCell((cell, colNumber) => {
-      if (colNumber > 1) {
+      if (colNumber > 1 && colNumber < 3) {
         const name = cell.value;
         const slug = slugify(name);
         const ingredients = worksheet.getCell(`B${colNumber}`).value;
@@ -82,7 +82,7 @@ const run = async () => {
       }))
         console.log('pr',pR);
     }))
-    // console.log('productRecords',productRecords);
+    console.log('productRecords',productRecords);
     let aa = 0;
     await BBPromise.mapSeries(productRecords, (async (pt) => {
       await bulkCreate(pt);
